@@ -1,0 +1,184 @@
+:root {
+	--colorDark: #000000;
+	--colorLight: #A695FF;
+
+	--shadowStuff: url(#shadowEffect);
+	--overlayShadowColor: #000000;
+	--outlineStuff: url(#outlineEffect);
+	--overlayOutlineColor: #000000;
+
+	--effectFilters: var(--outlineStuff) var(--shadowStuff);
+
+	--horizontalMargin: 8px;
+	--verticalMargin: 8px;
+
+	--verticalSpacing: 2px;
+
+	--timezoneFont: "Manrope";
+	--timezoneFontSize: 12pt;
+	--timezoneFontStyle: "normal";
+	--timezoneFontWeight: 900;
+	--timezoneAddWeight: 0.7px;
+	--timezoneLetterSpacing: 0px;
+	--timezoneColorActual: #A695FF;
+	--timezoneColor: var(--timezoneColorActual);
+	--headerTransform: uppercase;
+
+	--clockFont: "Manrope";
+	--clockFontSize: 27pt;
+	--clockFontStyle: "normal";
+	--clockFontWeight: 900;
+	--clockAddWeight: 1px;
+	--clockLetterSpacing: -1px;
+	--clockColorActual: #FFFFFF;
+	--clockColor: var(--clockColorActual);
+
+	--secondsFont: "Manrope";
+	--secondsFontSize: 21pt;
+	--secondsFontStyle: "normal";
+	--secondsFontWeight: 900;
+	--secondsLetterSpacing: -1px;
+	--secondsAddWeight: 0.9px;
+
+	--meridiemFont: "Manrope";
+	--meridiemFontSize: 12pt;
+	--meridiemFontStyle: "normal";
+	--meridiemFontWeight: 900;
+	--meridiemLetterSpacing: 1px;
+	--meridiemAddWeight: 0.5px;
+
+	--elementWidth: 147px;
+	--elementJustify: center;
+
+	--animationDuration: 0.5s;
+}
+
+@keyframes slideIn {
+	0% {
+		transform: translateX(30px);
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(0px);
+		opacity: 1;
+	}
+}
+
+@keyframes slideOut {
+	0% {
+		transform: translateX(0px);
+		opacity: 1;
+	}
+	100% {
+		transform: translateX(30px);
+		opacity: 0;
+	}
+}
+
+.slideIn, .slideOut {
+	animation-duration: var(--animationDuration);
+	animation-direction: forwards;
+	animation-fill-mode: forwards;
+	animation-iteration-count: 1;	
+}
+
+.slideIn { animation-name: slideIn; }
+.slideOut { animation-name: slideOut; }
+
+body {
+	background: transparent;
+	background-color: transparent;
+}
+
+#wrapper {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	display: flex;
+	flex-direction: row;
+	padding-top: var(--verticalMargin);
+	padding-bottom: var(--verticalMargin);
+	padding-left: var(--horizontalMargin);
+	padding-right: var(--horizontalMargin);
+	align-items: var(--elementJustify);
+}
+
+.clockElement {
+	width: var(--elementWidth);
+	align-items: var(--elementJustify);
+	display: flex;
+	flex-direction: column;
+}
+
+.head, .value {
+	padding-top: var(--verticalSpacing);
+	padding-bottom: var(--verticalSpacing);
+	padding-left: 4px;
+	padding-right: 4px;
+	text-align: center;
+	filter: var(--effectFilters);
+}
+
+.head {
+	font-family: var(--timezoneFont);
+	font-size: var(--timezoneFontSize);
+	font-style: var(--timezoneFontStyle);
+	font-weight: var(--timezoneFontWeight);
+	background-image: linear-gradient(170deg, #FFF 20%, var(--timezoneColor) 100%);
+	-webkit-text-stroke: var(--timezoneAddWeight) transparent;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	letter-spacing: var(--timezoneLetterSpacing);
+	text-transform: var(--headerTransform);
+}
+
+.value {
+	font-family: var(--clockFont);
+	font-size: var(--clockFontSize);
+	letter-spacing: var(--clockLetterSpacing);
+	font-style: var(--clockFontStyle);
+	font-variant-numeric: tabular-nums;
+	font-weight: var(--clockFontWeight);
+	/*background-image: linear-gradient(170deg, #FFF 40%, #000 160%);*/
+	background-color: var(--clockColor);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	-webkit-text-stroke: var(--clockAddWeight) transparent;
+	display: flex;
+	align-items: baseline;
+}
+
+.second:before {
+	content: ":";
+}
+.second {
+	font-variant-numeric: tabular-nums;
+	font-family: var(--secondsFont);
+	font-size: var(--secondsFontSize);
+	font-style: var(--secondsFontStyle);
+	font-weight: var(--secondsFontWeight);
+	letter-spacing: var(--secondsLetterSpacing);
+	-webkit-text-stroke: var(--secondsAddWeight) transparent;
+}
+.meridiem {
+	font-family: var(--meridiemFont);
+	font-size: var(--meridiemFontSize);
+	letter-spacing: var(--meridiemLetterSpacing);
+	font-style: var(--meridiemFontStyle);
+	font-weight: var(--meridiemFontWeight);
+	text-align: center;
+	white-space: break-spaces;
+	-webkit-text-stroke: var(--meridiemAddWeight) transparent;
+}
+
+#filterWrapper {
+	position: fixed;
+	top: -100vh;
+	left: -100vw;
+}
+.effectWrapper {
+	width: var(--elementWidth);
+	align-items: var(--elementJustify);
+	display: flex;
+	flex-direction: column;
+}
