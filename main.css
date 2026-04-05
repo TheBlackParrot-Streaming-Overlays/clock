@@ -24,6 +24,11 @@
 	--timezoneColor: var(--timezoneColorActual);
 	--headerTransform: uppercase;
 
+	--headerGradientAngle: 170deg;
+	--headerGradientColor: #FFFFFF;
+	--headerGradientBackground: linear-gradient(var(--headerGradientAngle), var(--headerGradientColor) 0%, var(--timezoneColor) 75%);
+	--headerBackgroundImage: var(--headerGradientBackground);
+
 	--clockFont: "Manrope";
 	--clockFontSize: 27pt;
 	--clockFontStyle: "normal";
@@ -124,7 +129,8 @@ body {
 	font-size: var(--timezoneFontSize);
 	font-style: var(--timezoneFontStyle);
 	font-weight: var(--timezoneFontWeight);
-	background-image: linear-gradient(170deg, #FFF 20%, var(--timezoneColor) 100%);
+	background-color: var(--timezoneColor);
+	background-image: var(--headerBackgroundImage);
 	-webkit-text-stroke: var(--timezoneAddWeight) transparent;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;

@@ -307,7 +307,23 @@ const settingUpdaters = {
 	},
 	use12Hour: function(value) {
 		doMainClock();
-	}
+	},
+
+	headerUsesGradient: function(value) {
+		if(value === "true") {
+			rootCSS().setProperty("--headerBackgroundImage", `var(--headerGradientBackground)`);
+			rootCSS().setProperty("--headerBackgroundColor", "unset");
+		} else {
+			rootCSS().setProperty("--headerBackgroundImage", "unset");
+			rootCSS().setProperty("--headerBackgroundColor", `var(--timezoneColor)`);
+		}
+	},
+	headerGradientColor: function(value) {
+		rootCSS().setProperty("--headerGradientColor", value);
+	},
+	headerGradientAngle: function(value) {
+		rootCSS().setProperty("--headerGradientAngle", `${value}deg`);
+	},
 };
 
 function updateSetting(which, value, oldValue) {
