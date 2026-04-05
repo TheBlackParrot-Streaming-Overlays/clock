@@ -324,6 +324,13 @@ const settingUpdaters = {
 	headerGradientAngle: function(value) {
 		rootCSS().setProperty("--headerGradientAngle", `${value}deg`);
 	},
+
+	slideAnimationIsVertical: function(value) {
+		rootCSS().setProperty("--slideAnimationDirection", value === "true" ? "translateY(var(--slideAnimationAmount))" : "translateX(var(--slideAnimationAmount))");
+	},
+	slideAnimationAmount: function(value) {
+		rootCSS().setProperty("--slideAnimationAmount", `${value}px`);
+	}
 };
 
 function updateSetting(which, value, oldValue) {

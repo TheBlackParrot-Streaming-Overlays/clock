@@ -56,11 +56,14 @@
 	--elementJustify: center;
 
 	--animationDuration: 0.5s;
+
+	--slideAnimationAmount: 30px;
+	--slideAnimationDirection: translateX(var(--slideAnimationAmount));
 }
 
 @keyframes slideIn {
 	0% {
-		transform: translateX(30px);
+		transform: var(--slideAnimationDirection);
 		opacity: 0;
 	}
 	100% {
@@ -75,7 +78,7 @@
 		opacity: 1;
 	}
 	100% {
-		transform: translateX(30px);
+		transform: var(--slideAnimationDirection);
 		opacity: 0;
 	}
 }

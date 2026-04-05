@@ -182,6 +182,13 @@ function switchClock() {
 	let newActiveClockHead = $(`#${enabled[currentClock]} .head`);
 	let newActiveClockValue = $(`#${enabled[currentClock]} .value`);
 
+	const isVertical = localStorage.getItem("setting_clock_slideAnimationIsVertical") === "true";
+
+	const oldFirstElement = isVertical ? oldActiveClockValue : oldActiveClockHead;
+	const oldSecondElement = isVertical ? oldActiveClockHead : oldActiveClockValue;
+	const newFirstElement = newActiveClockHead;
+	const newSecondElement = newActiveClockValue;
+
 	clearTimeout(clockSwitchTO);
 	clockSwitchTO = setTimeout(function() {
 		switchClock();
@@ -195,9 +202,9 @@ function switchClock() {
 		$(".clockElement").removeClass("slideOut").removeClass("slideIn").hide();
 
 		newActiveClock.addClass("activeClock").show();
-		newActiveClockHead.removeClass("slideOut").addClass("slideIn").show();
+		newFirstElement.removeClass("slideOut").addClass("slideIn").show();
 		setTimeout(function() {
-			newActiveClockValue.removeClass("slideOut").addClass("slideIn").show();
+			newSecondElement.removeClass("slideOut").addClass("slideIn").show();
 		}, 100);
 		return;
 	}
@@ -208,21 +215,21 @@ function switchClock() {
 	}
 
 	if(enabled.length > 1) {
-		oldActiveClockHead.removeClass("slideIn").addClass("slideOut").show();
+		oldFirstElement.removeClass("slideIn").addClass("slideOut").show();
 
 		setTimeout(function() {
-			oldActiveClockValue.removeClass("slideIn").addClass("slideOut").show();
+			oldSecondElement.removeClass("slideIn").addClass("slideOut").show();
 
-			oldActiveClockValue.one("animationend", function() {
+			oldSecondElement.one("animationend", function() {
 				oldActiveClock.removeClass("activeClock").hide();
-				oldActiveClockHead.removeClass("slideOut").hide();
-				oldActiveClockValue.removeClass("slideOut").hide();
+				oldFirstElement.removeClass("slideOut").hide();
+				oldSecondElement.removeClass("slideOut").hide();
 
 				newActiveClock.addClass("activeClock").show();
-				newActiveClockHead.removeClass("slideOut").addClass("slideIn").show();
-				newActiveClockValue.hide();
+				newFirstElement.removeClass("slideOut").addClass("slideIn").show();
+				newSecondElement.hide();
 				setTimeout(function() {
-					newActiveClockValue.removeClass("slideOut").addClass("slideIn").show();
+					newSecondElement.removeClass("slideOut").addClass("slideIn").show();
 				}, 100);
 			});
 		}, 100);
